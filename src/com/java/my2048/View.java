@@ -22,7 +22,6 @@ public class View extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
         g.setColor(BG_COLOR);
         g.fillRect(0, 0, this.getSize().width, this.getSize().height);
         for (int x = 0; x < 4; x++) {
@@ -33,10 +32,14 @@ public class View extends JPanel {
 
         g.drawString("Score: " + controller.getScore(), 140, 465);
 
-        if (isGameWon) {
-            JOptionPane.showMessageDialog(this, "You've won!");
-        } else if(isGameLost) {
-            JOptionPane.showMessageDialog(this, "You've lost :(");
+        if (isGameWon || isGameLost) {
+            String offer;
+            if (isGameLost)
+                offer = "Вы проиграли  =(((\nДля начала новой игры нажмите ESC";
+            else
+                offer = "Победа! =)))\nДля начала новой игры нажмите ESC";
+            JOptionPane.showMessageDialog(this, offer);
+            repaint();
         }
     }
 
@@ -47,7 +50,7 @@ public class View extends JPanel {
         int xOffset = offsetCoors(x);
         int yOffset = offsetCoors(y);
         g.setColor(tile.getTileColor());
-        g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE , 8, 8);
+        g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 8, 8);
         g.setColor(tile.getFontColor());
         final int size = value < 100 ? 36 : value < 1000 ? 32 : 24;
         final Font font = new Font(FONT_NAME, Font.BOLD, size);

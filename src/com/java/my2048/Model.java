@@ -1,5 +1,6 @@
 package com.java.my2048;
 
+import javax.swing.*;
 import java.util.*;
 
 public class Model {
@@ -23,6 +24,7 @@ public class Model {
                 gameTiles[i][j] = new Tile();
             }
         }
+        maxTile = 2;
         addTile();
         addTile();
     }
@@ -65,7 +67,8 @@ public class Model {
             if (tiles[j].value != 0 && tiles[j].value == tiles[j + 1].value) {
                 tiles[j].value = (tiles[j].value * 2);
                 tiles[j + 1].value = 0;
-                if (tiles[j].value > maxTile) maxTile = tiles[j].value;
+                if (tiles[j].value > maxTile)
+                    maxTile = tiles[j].value;
                 score += tiles[j].value;
                 isChanged = true;
             }
@@ -232,5 +235,14 @@ public class Model {
         queue.add(getMoveEfficiency(this::up));
         queue.add(getMoveEfficiency(this::down));
         queue.peek().getMove().move();
+    }
+
+    public void help() {
+        JOptionPane.showMessageDialog(null, "Если вы нажмете:\n" +
+                "Z - откат на один ход назад;\n" +
+                "R - программа делает рандомный ход;\n" +
+                "A - программа делает наиболее эффективным ход.",
+                "Help",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 }
