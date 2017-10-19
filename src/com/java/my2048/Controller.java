@@ -9,7 +9,7 @@ public class Controller extends KeyAdapter {
     private Model model;
 
     private View view;
-    private static int WINNING_TILE = 8;
+    private static int WINNING_TILE = 2048;
 
     public View getView() {
         return view;
